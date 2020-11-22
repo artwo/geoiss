@@ -16,6 +16,9 @@ class GeoIssController @Autowired constructor(
     fun getIssLocation() {
     }
 
-    @GetMapping(value = ["/cities/count"], produces = ["application/json"])
-    fun getCitiesCount(): Int = geometryService.geoCities.size
+//    @GetMapping(value = ["/cities/count"], produces = ["application/json"])
+//    fun getCitiesCount(): Int = geometryService.geoCities.size
+
+    @GetMapping(value = ["/countries/count"], produces = ["application/json"])
+    fun getCitiesCount(): Int = geometryService.geoCountries.countries.size
 }

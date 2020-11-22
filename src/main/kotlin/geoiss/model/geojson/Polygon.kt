@@ -1,23 +1,13 @@
-package geoiss.model
+package geoiss.model.geojson
 
-import geoiss.model.geojson.GeoPolygon
 import kotlin.math.max
 import kotlin.math.min
 
 data class Polygon(
-        val id: String,
-        val coordinates: List<Coordinate>
+    val coordinates: List<Coordinate>
 ) {
     companion object {
         private const val INFINITE = 180f // MAXIMUM value of longitude
-
-        fun fromGeoPolygon(geoPolygon: GeoPolygon): Polygon = Polygon(
-                geoPolygon.id,
-                geoPolygon.geometry.coordinates()
-                        .map { Coordinate(it[0], it[1]) }
-        )
-
-        fun fromGeoPolygons(geoPolygons: List<GeoPolygon>): List<Polygon> = geoPolygons.map { fromGeoPolygon(it) }
     }
 
     fun containsCoordinate(position: Coordinate): Boolean {
@@ -41,10 +31,10 @@ data class Polygon(
      * Given Coordinates p, q, r, the function checks if point q lies on line segment 'pr'
      */
     private fun onSegment(p: Coordinate, q: Coordinate, r: Coordinate): Boolean =
-            q.x() <= max(p.x(), r.x()) &&
-                    q.x() >= min(p.x(), r.x()) &&
-                    q.y() <= max(p.y(), r.y()) &&
-                    q.y() >= min(p.y(), r.y())
+        q.x() <= max(p.x(), r.x()) &&
+                q.x() >= min(p.x(), r.x()) &&
+                q.y() <= max(p.y(), r.y()) &&
+                q.y() >= min(p.y(), r.y())
 
     /**
      * Given Coordinates p, q, r, the function calculates the orientation of the segments.

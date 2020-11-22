@@ -1,4 +1,4 @@
-package geoiss.model
+package geoiss.model.geojson
 
 data class Coordinate(
     val longitude: Float,

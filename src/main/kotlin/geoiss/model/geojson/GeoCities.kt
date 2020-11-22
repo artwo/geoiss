@@ -2,7 +2,7 @@ package geoiss.model.geojson
 
 import com.fasterxml.jackson.annotation.JsonProperty
 
-data class Properties(
-    @JsonProperty("NAME")
-    val name: String
+data class GeoCities(
+    @JsonProperty("features")
+    val cities: List<GeoCity>
 )

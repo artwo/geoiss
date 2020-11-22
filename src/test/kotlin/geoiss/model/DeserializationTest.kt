@@ -2,7 +2,7 @@ package geoiss.model
 
 import com.fasterxml.jackson.module.kotlin.readValue
 import geoiss.config.CustomObjectMapper
-import geoiss.model.geojson.Geometry
+import geoiss.model.geojson.PolygonGeometry
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
@@ -62,7 +62,7 @@ class DeserializationTest {
             listOf(9.137248f, 48.790411f)
         )
 
-        val geometry = CustomObjectMapper.readValue<Geometry>(jsonString)
+        val geometry = CustomObjectMapper.readValue<PolygonGeometry>(jsonString)
         assertEquals(4, geometry.coordinates().size)
         geometry.coordinates().forEachIndexed { i, actual ->
             verifyCoordinate(expectedCoordinates[i], actual)

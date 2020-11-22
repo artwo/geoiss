@@ -1,8 +1,7 @@
 package geoiss.config
 
 import com.fasterxml.jackson.module.kotlin.readValue
-import geoiss.model.GeoCities
-import geoiss.model.GeoCity
+import geoiss.model.geojson.CountriesGeoJson
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -17,11 +16,19 @@ import java.io.UncheckedIOException
 @Configuration
 class GeoIssConfiguration {
 
+//    @Bean
+//    fun geoCities(
+//        @Value("classpath:cities.geojson")
+//        citiesGeoJson: Resource
+//    ): List<GeoCity> = CustomObjectMapper.readValue<GeoCities>(citiesGeoJson.asString()).cities
+
     @Bean
-    fun geoCities(
-            @Value("classpath:cities.geojson")
-            citiesGeoJson: Resource
-    ): List<GeoCity> = CustomObjectMapper.readValue<GeoCities>(citiesGeoJson.asString()).cities
+    fun geoCountries(
+        @Value("classpath:countries.geo.json")
+        countriesGeoJsonResource: Resource
+    ): CountriesGeoJson =
+        CustomObjectMapper.readValue<CountriesGeoJson>(countriesGeoJsonResource.asString())
+//            .toGeoCountries()
 
     private fun Resource.asString() = try {
         val reader = InputStreamReader(this.inputStream, Charsets.UTF_8)

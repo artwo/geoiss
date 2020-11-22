@@ -1,4 +1,4 @@
-package geoiss.model
+package geoiss.model.geojson
 
 enum class Orientation {
     COLLINEAR,

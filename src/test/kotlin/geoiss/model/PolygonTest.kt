@@ -1,5 +1,7 @@
 package geoiss.model
 
+import geoiss.model.geojson.Coordinate
+import geoiss.model.geojson.Polygon
 import org.junit.jupiter.api.Test
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
@@ -12,7 +14,7 @@ class PolygonTest {
         val b = Coordinate(4f, 3f)
         val c = Coordinate(6f, 1f)
         val d = Coordinate(3f, 1f)
-        val p = Polygon("1234", listOf(a, b, c, d))
+        val p = Polygon(listOf(a, b, c, d))
 
         val point = Coordinate(4.2f, 1.97f)
 
@@ -25,7 +27,7 @@ class PolygonTest {
         val b = Coordinate(4f, 3f)
         val c = Coordinate(6f, 1f)
         val d = Coordinate(3f, 1f)
-        val p = Polygon("1234", listOf(a, b, c, d))
+        val p = Polygon(listOf(a, b, c, d))
 
         val point = Coordinate(2.58f, 2.51f)
 
@@ -38,7 +40,7 @@ class PolygonTest {
         val b = Coordinate(4f, 3f)
         val c = Coordinate(6f, 1f)
         val d = Coordinate(3f, 1f)
-        val p = Polygon("1234", listOf(a, b, c, d))
+        val p = Polygon(listOf(a, b, c, d))
 
         val point = Coordinate(5.96f, 2.15f)
 
@@ -51,7 +53,7 @@ class PolygonTest {
         val b = Coordinate(4f, 3f)
         val c = Coordinate(6f, 1f)
         val d = Coordinate(3f, 1f)
-        val p = Polygon("1234", listOf(a, b, c, d))
+        val p = Polygon(listOf(a, b, c, d))
 
         val point = Coordinate(4f, 4f)
 
@@ -64,7 +66,7 @@ class PolygonTest {
         val b = Coordinate(4f, 3f)
         val c = Coordinate(6f, 1f)
         val d = Coordinate(3f, 1f)
-        val p = Polygon("1234", listOf(a, b, c, d))
+        val p = Polygon(listOf(a, b, c, d))
 
         val point = Coordinate(4.18f, 0.87f)
 
@@ -77,7 +79,7 @@ class PolygonTest {
         val b = Coordinate(4f, 3f)
         val c = Coordinate(6f, 1f)
         val d = Coordinate(3f, 1f)
-        val p = Polygon("1234", listOf(a, b, c, d))
+        val p = Polygon(listOf(a, b, c, d))
 
         val point = Coordinate(4.64f, 1f)
 
@@ -90,7 +92,7 @@ class PolygonTest {
         val b = Coordinate(4f, 3f)
         val c = Coordinate(6f, 1f)
         val d = Coordinate(3f, 1f)
-        val p = Polygon("1234", listOf(a, b, c, d))
+        val p = Polygon(listOf(a, b, c, d))
 
         val point = Coordinate(4f, 3f)
 
@@ -109,7 +111,7 @@ class PolygonTest {
         val h = Coordinate(2.3365669988926f, -1.1234903855834f)
         val i = Coordinate(0.9029618443572f, -3.3302758481828f)
         val j = Coordinate(-0.5306433101782f, -3.2014124635055f)
-        val p = Polygon("1234", listOf(a, b, c, d, e, f, g, h, i, j))
+        val p = Polygon(listOf(a, b, c, d, e, f, g, h, i, j))
 
         val point = Coordinate(2.3043511527232f, -1.8322390013088f)
 
@@ -128,7 +130,7 @@ class PolygonTest {
         val h = Coordinate(2.3365669988926f, -1.1234903855834f)
         val i = Coordinate(0.9029618443572f, -3.3302758481828f)
         val j = Coordinate(-0.5306433101782f, -3.2014124635055f)
-        val p = Polygon("1234", listOf(a, b, c, d, e, f, g, h, i, j))
+        val p = Polygon(listOf(a, b, c, d, e, f, g, h, i, j))
 
         val point = Coordinate(4.8010792308467f, -2.4765559246955f)
 
