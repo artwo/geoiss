@@ -20,5 +20,10 @@ class GeoIssController @Autowired constructor(
 //    fun getCitiesCount(): Int = geometryService.geoCities.size
 
     @GetMapping(value = ["/countries/count"], produces = ["application/json"])
-    fun getCitiesCount(): Int = geometryService.geoCountries.countries.size
+    fun getCountriesCount(): Int = geometryService.geoCountries.size
+
+//    @GetMapping(value = ["/countries/geometry/types"], produces = ["application/json"])
+//    fun getCountriesGeometryTypes(): List<GeometryType> = geometryService.geoCountries.countries.map {
+//        GeometryType.fromString(it.geometry.type)
+//    }
 }

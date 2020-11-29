@@ -2,6 +2,7 @@ package geoiss.config
 
 import com.fasterxml.jackson.module.kotlin.readValue
 import geoiss.model.geojson.CountriesGeoJson
+import geoiss.model.geojson.GeoCountry
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -26,9 +27,9 @@ class GeoIssConfiguration {
     fun geoCountries(
         @Value("classpath:countries.geo.json")
         countriesGeoJsonResource: Resource
-    ): CountriesGeoJson =
+    ): List<GeoCountry> =
         CustomObjectMapper.readValue<CountriesGeoJson>(countriesGeoJsonResource.asString())
-//            .toGeoCountries()
+            .toGeoCountries()
 
     private fun Resource.asString() = try {
         val reader = InputStreamReader(this.inputStream, Charsets.UTF_8)
