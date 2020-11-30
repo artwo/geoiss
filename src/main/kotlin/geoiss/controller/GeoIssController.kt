@@ -1,5 +1,6 @@
 package geoiss.controller
 
+import geoiss.model.IssResponseBody
 import geoiss.service.GeometryService
 import geoiss.service.IssService
 import org.springframework.beans.factory.annotation.Autowired
@@ -13,17 +14,11 @@ class GeoIssController @Autowired constructor(
 ) {
 
     @GetMapping(value = ["/iss"], produces = ["application/json"])
-    fun getIssLocation() {
-    }
+    fun getIssLocation(): IssResponseBody = issService.executeIssRequest()
 
 //    @GetMapping(value = ["/cities/count"], produces = ["application/json"])
 //    fun getCitiesCount(): Int = geometryService.geoCities.size
 
     @GetMapping(value = ["/countries/count"], produces = ["application/json"])
     fun getCountriesCount(): Int = geometryService.geoCountries.size
-
-//    @GetMapping(value = ["/countries/geometry/types"], produces = ["application/json"])
-//    fun getCountriesGeometryTypes(): List<GeometryType> = geometryService.geoCountries.countries.map {
-//        GeometryType.fromString(it.geometry.type)
-//    }
 }
