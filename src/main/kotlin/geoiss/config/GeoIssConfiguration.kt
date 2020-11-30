@@ -17,6 +17,11 @@ import java.io.UncheckedIOException
 @Configuration
 class GeoIssConfiguration {
 
+    @Bean
+    fun urlProvider(
+        @Value("\${urlProvider.iss.host}") issHost: String
+    ) = UrlProvider(issHost)
+
 //    @Bean
 //    fun geoCities(
 //        @Value("classpath:cities.geojson")
@@ -25,8 +30,7 @@ class GeoIssConfiguration {
 
     @Bean
     fun geoCountries(
-        @Value("classpath:countries.geo.json")
-        countriesGeoJsonResource: Resource
+        @Value("classpath:countries.geo.json") countriesGeoJsonResource: Resource
     ): List<GeoCountry> =
         CustomObjectMapper.readValue<CountriesGeoJson>(countriesGeoJsonResource.asString())
             .toGeoCountries()
