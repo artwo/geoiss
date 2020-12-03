@@ -10,12 +10,11 @@ class HttpClientTraceInterceptor(
 ) : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
-        val originalRequest = chain.request()
-        val newRequest = requestTrace.id?.let { traceId ->
-            originalRequest.newBuilder()
+        val request = requestTrace.id?.let { traceId ->
+            chain.request().newBuilder()
                 .addHeader(RequestTracingFilter.TRACE_HEADER, traceId)
                 .build()
-        } ?: originalRequest
-        return chain.proceed(newRequest)
+        } ?: chain.request()
+        return chain.proceed(request)
     }
 }
