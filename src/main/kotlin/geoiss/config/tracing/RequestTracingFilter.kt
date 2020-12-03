@@ -1,13 +1,10 @@
-package geoiss.config
+package geoiss.config.tracing
 
 import net.logstash.logback.encoder.org.apache.commons.lang3.StringUtils
 import org.slf4j.MDC
 import org.springframework.beans.factory.annotation.Value
-import org.springframework.context.annotation.Bean
-import org.springframework.context.annotation.Configuration
 import org.springframework.core.annotation.Order
 import org.springframework.stereotype.Component
-import org.springframework.web.context.annotation.RequestScope
 import org.springframework.web.filter.OncePerRequestFilter
 import java.util.UUID
 import javax.servlet.FilterChain
@@ -22,7 +19,7 @@ class RequestTracingFilter(
 ) : OncePerRequestFilter() {
 
     companion object {
-        private const val TRACE_HEADER = "X-Correlation-ID"
+        const val TRACE_HEADER = "X-Correlation-ID"
     }
 
     override fun doFilterInternal(
@@ -44,13 +41,3 @@ class RequestTracingFilter(
         if (StringUtils.isNotEmpty(request.getHeader(TRACE_HEADER))) request.getHeader(TRACE_HEADER)
         else "$applicationName-${UUID.randomUUID()}"
 }
-
-@Configuration
-class RequestTraceBeanProvider {
-
-    @Bean
-    @RequestScope
-    fun requestTrace(): RequestTrace = RequestTrace()
-}
-
-open class RequestTrace(var id: String? = null)
