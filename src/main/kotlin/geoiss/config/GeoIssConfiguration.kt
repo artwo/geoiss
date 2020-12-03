@@ -4,7 +4,9 @@ import com.fasterxml.jackson.module.kotlin.readValue
 import geoiss.model.geojson.CountriesGeoJson
 import geoiss.model.geojson.GeoCountry
 import geoiss.service.HttpClient
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -26,8 +28,19 @@ class GeoIssConfiguration {
     ) = UrlProvider(issHost)
 
     @Bean
+    @Autowired
     @Scope("prototype")
-    fun httpClient(): HttpClient = HttpClient(OkHttpClient(), CustomObjectMapper, HttpClient.Properties())
+    fun httpClient(httpClientTraceInterceptor: Interceptor): HttpClient =
+        HttpClient(
+            customHttpClient(httpClientTraceInterceptor),
+            CustomObjectMapper,
+            HttpClient.Properties()
+        )
+
+    private fun customHttpClient(interceptor: Interceptor): OkHttpClient =
+        OkHttpClient.Builder()
+            .addInterceptor(interceptor)
+            .build()
 
 //    @Bean
 //    fun geoCities(
