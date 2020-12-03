@@ -2,7 +2,6 @@ package geoiss.config
 
 import net.logstash.logback.encoder.org.apache.commons.lang3.StringUtils
 import org.slf4j.MDC
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -17,7 +16,7 @@ import javax.servlet.http.HttpServletResponse
 
 @Component
 @Order(1)
-class RequestTraceFilter @Autowired constructor(
+class RequestTraceFilter(
     @Value("\${spring.application.name}") val applicationName: String,
     val requestTrace: RequestTrace
 ) : OncePerRequestFilter() {
