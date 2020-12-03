@@ -32,9 +32,9 @@ data class Polygon(
      */
     private fun onSegment(p: Coordinate, q: Coordinate, r: Coordinate): Boolean =
         q.x() <= max(p.x(), r.x()) &&
-                q.x() >= min(p.x(), r.x()) &&
-                q.y() <= max(p.y(), r.y()) &&
-                q.y() >= min(p.y(), r.y())
+            q.x() >= min(p.x(), r.x()) &&
+            q.y() <= max(p.y(), r.y()) &&
+            q.y() >= min(p.y(), r.y())
 
     /**
      * Given Coordinates p, q, r, the function calculates the orientation of the segments.

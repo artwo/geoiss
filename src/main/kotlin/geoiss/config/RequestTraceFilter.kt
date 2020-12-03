@@ -10,7 +10,7 @@ import org.springframework.core.annotation.Order
 import org.springframework.stereotype.Component
 import org.springframework.web.context.annotation.RequestScope
 import org.springframework.web.filter.OncePerRequestFilter
-import java.util.*
+import java.util.UUID
 import javax.servlet.FilterChain
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
