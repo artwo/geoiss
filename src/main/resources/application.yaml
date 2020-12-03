@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: geo-iss
   profiles:
     active: ${SPRING_PROFILES_ACTIVE:dev}
 
