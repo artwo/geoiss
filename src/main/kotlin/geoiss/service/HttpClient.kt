@@ -1,7 +1,7 @@
 package geoiss.service
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
-import geoiss.config.CustomObjectMapper
 import geoiss.model.HttpClientErrorException
 import geoiss.model.HttpServerErrorException
 import geoiss.model.ObjectDeserializationException
@@ -13,6 +13,7 @@ import java.io.IOException
 
 class HttpClient(
     private val client: OkHttpClient = OkHttpClient(),
+    val objectMapper: ObjectMapper = ObjectMapper(),
     val properties: Properties = Properties()
 ) {
 
@@ -56,7 +57,7 @@ class HttpClient(
 
     inline fun <reified T> String?.deserializeResponse(): T = try {
         this?.let {
-            CustomObjectMapper.readValue(it)
+            objectMapper.readValue(it)
         } ?: throw ObjectDeserializationException("Cannot deserialize null to ${T::class.simpleName}")
     } catch (e: IOException) {
         throw ObjectDeserializationException("Unable to deserialize ${T::class.simpleName} object", e)

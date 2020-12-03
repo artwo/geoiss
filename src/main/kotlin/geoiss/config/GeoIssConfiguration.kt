@@ -3,9 +3,12 @@ package geoiss.config
 import com.fasterxml.jackson.module.kotlin.readValue
 import geoiss.model.geojson.CountriesGeoJson
 import geoiss.model.geojson.GeoCountry
+import geoiss.service.HttpClient
+import okhttp3.OkHttpClient
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.context.annotation.Scope
 import org.springframework.core.io.Resource
 import org.springframework.scheduling.annotation.EnableScheduling
 import org.springframework.util.FileCopyUtils
@@ -21,6 +24,10 @@ class GeoIssConfiguration {
     fun urlProvider(
         @Value("\${urlProvider.iss.host}") issHost: String
     ) = UrlProvider(issHost)
+
+    @Bean
+    @Scope("prototype")
+    fun httpClient(): HttpClient = HttpClient(OkHttpClient(), CustomObjectMapper, HttpClient.Properties())
 
 //    @Bean
 //    fun geoCities(
