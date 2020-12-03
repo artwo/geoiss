@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse
 
 @Component
 @Order(1)
-class RequestTraceFilter(
+class RequestTracingFilter(
     @Value("\${spring.application.name}") val applicationName: String,
     val requestTrace: RequestTrace
 ) : OncePerRequestFilter() {
