@@ -27,7 +27,7 @@ class HttpClient(
 
     fun executeRequestWithRawResponse(request: Request, serverName: String? = null): String? {
         if (properties.logBeforeRequest)
-            log.info("Executing ${serverName.optionalText()} request with url ${request.url}${request.body?.let { " and payload ${request.body}" } ?: ""}")
+            log.info("Executing ${serverName.optionalText()} request [${request.method} ${request.url}${request.body?.let { " payload: ${request.body}" } ?: ""}]")
 
         request.execute(serverName).use {
             when {

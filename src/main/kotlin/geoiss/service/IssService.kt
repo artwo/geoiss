@@ -15,6 +15,6 @@ class IssService(
         Request.Builder()
             .url("${urlProvider.issHost}/iss-now.json")
             .build(),
-        "ISS API"
+        "ISS"
     )
 }
