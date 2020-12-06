@@ -40,12 +40,9 @@ test {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     implementation 'org.jetbrains.kotlin:kotlin-reflect'
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
-    testImplementation 'org.jetbrains.kotlin:kotlin-test'
-    testImplementation 'org.jetbrains.kotlin:kotlin-test-junit'
 
     // https://github.com/FasterXML/jackson-module-kotlin
     implementation 'com.fasterxml.jackson.module:jackson-module-kotlin:2.11.+'
@@ -60,15 +57,21 @@ dependencies {
     // https://mvnrepository.com/artifact/net.logstash.logback/logstash-logback-encoder
     implementation 'net.logstash.logback:logstash-logback-encoder:6.4'
 
+    testImplementation 'org.jetbrains.kotlin:kotlin-test'
+    testImplementation 'org.jetbrains.kotlin:kotlin-test-junit'
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+        exclude module: 'spring-boot-starter-logging'
+    }
     // https://mvnrepository.com/artifact/com.nhaarman.mockitokotlin2/mockito-kotlin
-    testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0'
+    testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.+'
     // https://github.com/willowtreeapps/assertk
     // https://mvnrepository.com/artifact/com.willowtreeapps.assertk/assertk-jvm
     testImplementation 'com.willowtreeapps.assertk:assertk-jvm:0.23'
     // https://mvnrepository.com/artifact/org.skyscreamer/jsonassert
-    testImplementation 'org.skyscreamer:jsonassert:1.5.0'
+    testImplementation 'org.skyscreamer:jsonassert:1.5.+'
     // https://mvnrepository.com/artifact/org.mock-server/mockserver-netty
-    testImplementation 'org.mock-server:mockserver-netty:5.11.2'
-    // https://mvnrepository.com/artifact/org.mock-server/mockserver-junit-rule
-    testImplementation 'org.mock-server:mockserver-junit-rule:5.11.2'
+    testImplementation 'org.mock-server:mockserver-netty:5.11.+'
+    // https://mvnrepository.com/artifact/org.mock-server/mockserver-junit-jupiter
+    testImplementation 'org.mock-server:mockserver-junit-jupiter:5.11.+'
 }
