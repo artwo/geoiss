@@ -1,6 +1,13 @@
 package geoiss.service
 
+import assertk.assertThat
+import assertk.assertions.isEqualTo
+import assertk.assertions.isFailure
+import assertk.assertions.isInstanceOf
+import assertk.assertions.isSuccess
 import geoiss.config.CustomObjectMapper
+import geoiss.model.HttpClientErrorException
+import geoiss.model.HttpServerErrorException
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
@@ -35,6 +42,46 @@ class HttpClientTest {
         JSONAssert.assertEquals(expectedResponse, actualResponse, JSONCompareMode.STRICT)
     }
 
+    @Test
+    fun `Test http call with object deserialization`() {
+        val expectedResponse = TestModel("response")
+        mockServerClient.`when`(mockRequest()).respond(
+            response()
+                .withStatusCode(200)
+                .withBody(json("""{ "test": "response" } """))
+        )
+
+        assertThat { httpClient.executeRequest<TestModel>(testRequest()) }
+            .isSuccess()
+            .isEqualTo(expectedResponse)
+    }
+
+    @Test
+    fun `Test http call with 400`() {
+        mockServerClient.`when`(mockRequest()).respond(
+            response()
+                .withStatusCode(400)
+                .withBody(json("""{ "error": "response" } """))
+        )
+
+        assertThat { httpClient.executeRequest<TestModel>(testRequest()) }
+            .isFailure()
+            .isInstanceOf(HttpClientErrorException::class)
+    }
+
+    @Test
+    fun `Test http call with 500`() {
+        mockServerClient.`when`(mockRequest()).respond(
+            response()
+                .withStatusCode(500)
+                .withBody(json("""{ "error": "response" } """))
+        )
+
+        assertThat { httpClient.executeRequest<TestModel>(testRequest()) }
+            .isFailure()
+            .isInstanceOf(HttpServerErrorException::class)
+    }
+
     private fun testRequest(): Request {
         return Request.Builder()
             .url("http://localhost:${mockServerRule.port}/anything")
@@ -52,4 +99,6 @@ class HttpClientTest {
         .withBody(
             json("""{ "test": "request" }""")
         )
+
+    private data class TestModel(val test: String)
 }
