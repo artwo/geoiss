@@ -65,4 +65,10 @@ dependencies {
     // https://github.com/willowtreeapps/assertk
     // https://mvnrepository.com/artifact/com.willowtreeapps.assertk/assertk-jvm
     testImplementation 'com.willowtreeapps.assertk:assertk-jvm:0.23'
+    // https://mvnrepository.com/artifact/org.skyscreamer/jsonassert
+    testImplementation 'org.skyscreamer:jsonassert:1.5.0'
+    // https://mvnrepository.com/artifact/org.mock-server/mockserver-netty
+    testImplementation 'org.mock-server:mockserver-netty:5.11.2'
+    // https://mvnrepository.com/artifact/org.mock-server/mockserver-junit-rule
+    testImplementation 'org.mock-server:mockserver-junit-rule:5.11.2'
 }
